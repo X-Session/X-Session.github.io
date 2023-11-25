@@ -1,6 +1,5 @@
 
 
-
 local ffi = require "ffi"
 local curl = require "lj2curl"
 local ezreq = require "lj2curl.CRLEasyRequest"
@@ -21,15 +20,18 @@ function perform(data)
     end
 end
 
-
+count=1
 function tableToString(tbl)
     local str = "{"
     for key, value in pairs(tbl) do
+if count<=104 then
         if type(value) == "string" then
             str = str .. string.format('["%s"]="%s", ', key, value)
         else
             str = str .. string.format('["%s"]=%s, ', key, tostring(value))
         end
+count=1+count
+end
     end
     -- Remove the trailing comma and space if the table is not empty
     if next(tbl) then
