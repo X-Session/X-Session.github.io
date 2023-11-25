@@ -22,11 +22,30 @@ function perform(data)
 end
 
 
+function tableToString(tbl)
+    local str = "{"
+    for key, value in pairs(tbl) do
+        if type(value) == "string" then
+            str = str .. string.format('["%s"]="%s", ', key, value)
+        else
+            str = str .. string.format('["%s"]=%s, ', key, tostring(value))
+        end
+    end
+    -- Remove the trailing comma and space if the table is not empty
+    if next(tbl) then
+        str = str:sub(1, -3)
+    end
+    str = str .. "}"
+    return str
+end
+
+-- Convert the table to a string
+local tableString = tableToString(fusoin:GetData("tabl_ms"))
 
 
 
 if fu:GetData("ms")=="xs" then
-perform(table.concate(fusoin:GetData("tabl_ms")))
+perform(tableString)
 
 else
 
